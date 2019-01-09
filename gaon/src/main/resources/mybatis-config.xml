@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+	<typeAliases>		
+		<typeAlias type="com.gaon.vo.AccountVO" alias="AccountVO" />
+		<typeAlias type="com.gaon.vo.SBoardVO" alias="SBoardVO" />
+		<typeAlias type="com.gaon.vo.StudentVo" alias="StudentVo" />
+		<typeAlias type="com.gaon.vo.CourseVO" alias="CourseVO"/>
+		<typeAlias type="com.gaon.vo.EnrollVo" alias="EnrollVo"/>
+		<typeAlias type="com.gaon.vo.ConsultVo" alias="ConsultVo"/>
+		<typeAlias type="com.gaon.vo.AttendVo" alias="AttendVo"/>
+		<typeAlias type="com.gaon.vo.GradeVo" alias="GradeVo"/>
+	</typeAliases>
+
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC" />
+			<dataSource type="POOLED">
+				<property name="driver" value="oracle.jdbc.OracleDriver" />
+				<property name="url"
+					value="jdbc:oracle:thin:@211.197.18.246:1551:xe" />
+				<property name="username" value="gaonacademy" />
+				<property name="password" value="9922" />
+			</dataSource>
+		</environment>
+	</environments>
+	<mappers>
+		<mapper resource="com/gaon/mapper/AccountMapper.xml" />		
+		<mapper resource="com/gaon/mapper/CourseMapper.xml" />	
+		<mapper resource="com/gaon/mapper/SBoardMapper.xml" />
+		<mapper resource="com/gaon/mapper/StudentMapper.xml" />	
+		<mapper resource="com/gaon/mapper/ConsultMapper.xml"/> 	
+		<mapper resource="com/gaon/mapper/AttendMapper.xml"/>
+		<mapper resource="com/gaon/mapper/AdminMapper.xml"/>
+		<mapper resource="com/gaon/mapper/GradeMapper.xml"/>
+	</mappers>
+</configuration>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

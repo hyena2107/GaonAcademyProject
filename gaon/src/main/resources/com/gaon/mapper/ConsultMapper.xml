@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gaon.mapper.ConsultMapper">
+
+  <select id="courseList" parameterType="int" resultType="CourseVO">
+  select * from courses where memberno= #{teacherNo}
+  </select>
+  
+  <select id="studentList" parameterType="int" resultType="AccountVO">
+  select * from member where memberno in(select studentno from enroll where courseno=#{courseNo})
+  </select>
+  
+  <insert id="insertconsultWrite" parameterType="ConsultVo">
+  insert into consult values(consultno.nextval,#{teacherNo},#{studentNo},#{consultDate},#{content},#{title},#{consultDetail},#{courseNo})
+  </insert>
+  
+  <select id="selectStudentConsultList" parameterType="int" resultType="ConsultVo">
+  select * from consult where studentno=#{studentNo} order by consultdate desc
+  </select>
+  
+  <select id="selectConsultDetail" parameterType="int" resultType="ConsultVo">
+  select * from consult where consultno=#{consultNo}
+  </select>
+</mapper>

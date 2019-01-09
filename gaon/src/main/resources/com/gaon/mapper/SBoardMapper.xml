@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.gaon.mapper.SBoardMapper">
+
+	<select id="memberList" parameterType="AccountVO"
+		resultType="AccountVO">
+		select*from member where usertype=#{userType} and
+		academyNo=#{academyNo}
+	</select>
+
+	<select id="sboardList" parameterType="int"
+		resultType="SBoardVO">
+		select*from sboard where teacherno=#{memberNo} or
+		studentno=#{memberNo}
+	</select>
+
+	<select id="scommentsList" parameterType="int"
+		resultType="com.gaon.vo.SCommentVO">
+		select*from scomment where sboardno=#{sboardNo} order by
+		scommentno
+	</select>
+
+	<select id="getSBoard" parameterType="int"
+		resultType="SBoardVO">
+		select*from sboard where sboardNo=#{sboardNo}
+	</select>
+	
+	<select id="getSBoardNo" parameterType="hashmap"
+		resultType="int">
+		select sboardNo from sboard where teacherno=#{teacherNo} and studentNo=#{studentNo}
+	</select>
+	
+
+	<insert id="writeSBoard" parameterType="hashmap">
+		insert into sboard
+		values(sboardno.nextval,#{teacherNo},#{studentNo},(select name from
+		member where memberno=#{teacherNo}),(select name from member where
+		memberno=#{studentNo}))
+	</insert>
+
+	<insert id="writeComment" parameterType="com.gaon.vo.SCommentVO">
+		insert into
+		scomment(scommentno,sboardno,scomments,writerno,writer,savedfilename,receiverNo,receiver)
+		values(scommentno.nextval,#{sboardNo},#{scomments},#{writerNo},(select
+		name from member where memberno=#{writerNo}),#{savedFileName},#{receiverNo},#{receiver})
+	</insert>
+
+	<select id="messageList" parameterType="int"
+		resultType="com.gaon.vo.SCommentVO">
+		select*from scomment where receiverNo=#{memberNo} order by scommentno desc
+	</select>
+	
+	
+
+</mapper>

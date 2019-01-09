@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- Root Context: defines shared resources visible to all other web components -->
+
+	<context:component-scan base-package="com.gaon.service"/>
+	<context:component-scan base-package="com.gaon.dao"/>
+
+	<bean
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location" value="classpath:env.properties" />
+	</bean>
+
+	<bean id="dataSource"
+		class="org.apache.commons.dbcp2.BasicDataSource">
+		<property name="driverClassName" value="${ds.driver}" />
+		<property name="url" value="${ds.url}" />
+		<property name="username" value="${ds.username}" />
+		<property name="password" value="${ds.password}" />
+	</bean>
+
+	<bean id="jdbcTemplate"
+		class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	
+
+
+<!-- account
+============================================================== -->
+	
+	<bean id="accountService" class="com.gaon.service.AccountServiceImpl">
+		<property name="accountDao" ref="AccountDaos" />
+		
+	</bean>
+
+	<bean id="AccountDaos" class="com.gaon.dao.AccountDaoImpl">
+		<property name="accountMapper" ref="accountMapper"/>		
+	</bean>
+	
+<!-- account  end
+============================================================== -->	
+<!-- Attend start   -->
+	<!--출석 빈 설정 -->
+	<bean id="attendService" class="com.gaon.service.AttendServiceImpl">
+		<property name="attendDao" ref="AttendDaos"/>
+	</bean>
+	
+	<bean id="AttendDaos" class="com.gaon.dao.AttendDaoImpl">
+		<property name="attendMapper" ref="attendMapper"/>
+		
+	</bean>
+
+	
+<!-- Attend end -->
+<!-- Student start   -->
+	<!--클래스니깐 빈설정해줌  -->
+	<bean id="studentDao" class="com.gaon.service.StudentServiceImpl">
+		<property name="studentDao" ref="StudentDaos"/>
+	</bean>
+	
+	<bean id="StudentDaos" class="com.gaon.dao.StudentDaoImpl">
+		<property name="studentMapper" ref="studentMapper"/>
+	</bean>
+
+	
+<!-- Student end -->
+
+
+
+
+
+
+<!-- myBatis -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation" value="classpath:mybatis-config.xml" />
+	</bean>
+
+	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref="sqlSessionFactory" />
+	</bean>
+	
+	<bean id="accountMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.gaon.mapper.AccountMapper"/>
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate"/>
+	</bean>
+	
+	<bean id="courseMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.gaon.mapper.CourseMapper"/>
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate"/>
+	</bean>
+	<bean id="sboardMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.gaon.mapper.SBoardMapper"/>
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate"/>
+	</bean>
+	
+	<bean id="studentMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.gaon.mapper.StudentMapper"/>
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate"/>
+	</bean>
+	
+    <bean id="consultMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.gaon.mapper.ConsultMapper"/>
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate"/>
+	</bean>
+	
+	<bean id="attendMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.gaon.mapper.AttendMapper"/>
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate"/>
+	</bean>
+	
+	<bean id="adminMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.gaon.mapper.AdminMapper"/>
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate"/>
+	</bean>
+	
+	<bean id="gradeMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.gaon.mapper.GradeMapper"/>
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate"/>
+	</bean>
+	
+
+</beans>
+
+
+
+
+
+
+
+
+
+
+
+

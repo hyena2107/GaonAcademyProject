@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+   	
+  <mapper namespace = "com.gaon.mapper.StudentMapper">
+ <!-- VO를가져왔으니깐 parameter Vo -->
+   	<insert id="StudentRegister"
+		parameterType="StudentVo"> 
+		INSERT INTO member
+		(memberno,id,password,name,email,regDate,phone,academyno,usertype)
+		VALUES
+		(memberno.nextval,#{id},#{password},#{name},#{email},#{regDate},#{phone},#{academyNo},#{userType})
+	</insert>
+ 
+ 	<select id="StudentList"
+ 		parameterType="StudentVo">
+ 		 FROM MEMBER WHERE MEMBERNO IN(SELECT STUDENTNO FROM ENROLL WHERE COURSENO=#{courseNo})
+ 		
+ 	</select>
+ 	
+ 	<!-- String 가져왔으니  -->
+ 	<select id="courseListMapper"
+ 			parameterType="String"
+ 			resultType="CourseVO">
+ 			SELECT * FROM COURSES WHERE TEACHERNAME = #{teacherName} 
+ 			
+ 	</select>
+ 	
+ 	<!--  enroll에서 학생 가져옴 -->
+ 	<select id="enrollListMapper"
+ 			parameterType="Int"
+ 			resultType="StudentVo">
+ 			
+ 			select * from  member where memberno in(select studentno from  enroll where courseno=#{courseNo})
+ 			 						
+	</select>
+  </mapper>
+  
+  

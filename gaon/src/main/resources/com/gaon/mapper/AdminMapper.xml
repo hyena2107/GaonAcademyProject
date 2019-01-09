@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gaon.mapper.AdminMapper">
+
+<select id="selectConsultList" parameterType="int" resultType="CourseVO">
+ select * from courses where academyno=#{academyNo}
+</select>
+
+<select id="selectAttendList" parameterType="hashmap" resultType="int">
+select count(*) from attend where enrollno = (select enrollno from enroll where studentno=#{studentNo} and courseno=#{courseNo}) and coursedate like concat(#{string},'%')
+</select>
+
+<select id="countAttend" parameterType="hashmap" resultType="int">
+select count(*) from attend
+where enrollno = (select enrollno from enroll where studentno=#{studentNo} and courseno=#{courseNo}) and 
+coursedate like concat(#{string},'%') and attendtype = 1
+</select>
+
+</mapper>

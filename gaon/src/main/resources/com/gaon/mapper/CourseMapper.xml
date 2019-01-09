@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.gaon.mapper.CourseMapper">
+
+	<insert id="addCourse"
+		parameterType="com.gaon.vo.CourseVO">
+		insert into courses
+		values(courseNo.nextval,#{academyNo},#{courseName},#{content},(select memberNo from member where name=#{teacherName}),0,#{teacherName})
+	</insert>
+	
+	<select id="getTeacherList" parameterType="int" resultType="AccountVO">
+		select name from member where academyNo=#{academyNo} and usertype='teacher'
+	</select>
+	
+	<select id="getTeacherCourseList" parameterType="int" resultType="com.gaon.vo.CourseVO">
+		select *from courses where memberNo=#{teacherNo}
+	</select>
+	<select id="getAcademyCourseList" parameterType="int" resultType="com.gaon.vo.CourseVO">
+		select *from courses where academyNo=#{academyNo}
+	</select>
+	
+	<update id="deleteCourse" parameterType="int">
+		update courses set deleted='1' where courseNo=#{courseNo}
+	</update>
+	
+	<select id="getStudentList" parameterType="hashmap" resultType="AccountVO">
+		select * from member where academyNo = #{academyNo} and usertype = 'student' and memberNo not in (select studentNo from enroll where courseNo=#{courseNo} and endDate='수강중')
+	</select>
+	
+	<insert id="addStudent"
+		parameterType="hashmap">
+		insert into enroll
+		values(enrollNo.nextval,#{studentNo},#{courseNo},'수강중',#{startDate})
+	</insert>
+	
+	<update id="deleteStudent" parameterType="hashmap">
+		update enroll set endDate=#{endDate} where studentNo=#{studentNo} and courseNo=#{courseNo}
+	</update>
+
+	<select id="getEnroll" parameterType="hashmap" resultType="AccountVO">
+		select * from member where academyNo = #{academyNo} and usertype = 'student' and memberNo in (select studentNo from enroll where courseNo=#{courseNo} and endDate='수강중')
+	</select>
+	
+</mapper>

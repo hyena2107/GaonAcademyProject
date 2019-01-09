@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gaon.mapper.GradeMapper">
+
+	<insert id="addGrade" parameterType="hashmap">
+		insert into grade(gradeNo,enrollno,testdate,grade,testname) values(gradeNo.nextval,(select enrollno from enroll where studentNo=#{studentNo} and courseNo=#{courseNo}),#{testDate},#{grade},#{testName})
+	</insert>
+</mapper>
