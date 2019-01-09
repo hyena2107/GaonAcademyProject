@@ -1,5 +1,6 @@
 package com.gaon.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,6 +53,15 @@ public class ConsultDaoImpl implements ConsultDao {
 		
 		ConsultVo consultDetail = consultMapper.selectConsultDetail(consultNo);
 		return consultDetail;
+	}
+
+	@Override
+	public List<AccountVO> searchDao(int courseNo,String name) {
+		HashMap<String,Object> params = new HashMap<>();
+		params.put("courseNo", courseNo);
+		params.put("name", name);
+		List<AccountVO> list = consultMapper.search(params);
+		return list;
 	}
 
 }

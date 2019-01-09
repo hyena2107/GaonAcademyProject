@@ -57,4 +57,10 @@ public class ConsultServiceImpl implements ConsultService {
 		return consultDetail;
 	}
 
+	@Override
+	public List<AccountVO> searchService(int courseNo,String name) {
+		List<AccountVO> list = consultDao.searchDao(courseNo,name);
+		return list;
+	}
+
 }

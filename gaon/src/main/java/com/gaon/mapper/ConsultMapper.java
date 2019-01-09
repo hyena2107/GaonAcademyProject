@@ -1,5 +1,6 @@
 package com.gaon.mapper;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.gaon.vo.AccountVO;
@@ -13,5 +14,6 @@ public interface ConsultMapper {
 	void insertconsultWrite(ConsultVo consultVo);
 	List<ConsultVo> selectStudentConsultList(int studentNo);
 	ConsultVo selectConsultDetail(int consultNo);
+	List<AccountVO> search(HashMap<String, Object> params);
 
 }

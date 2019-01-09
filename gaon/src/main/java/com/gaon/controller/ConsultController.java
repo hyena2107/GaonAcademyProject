@@ -122,4 +122,20 @@ public class ConsultController {
 		
 	}
 	
+	
+	@RequestMapping(value="research.action")
+	public String searchStudent(int courseNo,String name,Model model,HttpSession session) {
+		
+		if(session.getAttribute("login")==null) {
+			return "redirect:/home.action";
+		}
+		
+		List<AccountVO> list= consultService.searchService(courseNo,name);
+		model.addAttribute("searchList", list);
+		
+		return "consult/searchStudentConsultList";
+		
+	}
+	
+	
 }

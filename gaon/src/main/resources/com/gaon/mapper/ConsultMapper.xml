@@ -22,4 +22,18 @@
   <select id="selectConsultDetail" parameterType="int" resultType="ConsultVo">
   select * from consult where consultno=#{consultNo}
   </select>
+  
+  <select id="search" parameterType="hashmap" resultType="AccountVO">
+  	select * from member where name like CONCAT (#{name},'%') and memberNo in (select studentNo from enroll where courseNo=${courseNo})
+  </select>
+  
+
+  
+  
+  
+  
+  
+  
+  
+  
 </mapper>

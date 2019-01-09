@@ -18,4 +18,6 @@ public interface ConsultDao {
 
 	ConsultVo selectConsultDetail(int consultNo);
 
+	List<AccountVO> searchDao(int courseNo, String name);
+
 }

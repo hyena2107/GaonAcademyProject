@@ -8,7 +8,9 @@
 <jsp:include page="/WEB-INF/views/include/css.jsp" />
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script type="text/javascript">
+
 	$(function(){
+		
 		$(".viewConsultList").click(function(e){
 			
 			var studentNo = $(this).attr("data-studentNo");
@@ -37,12 +39,16 @@
 				}else{
 					$("#studentConsultList"+studentNo).css("display","none");
 				}
-				
 			}
-			
-			
-			
 		});
+		
+		
+		$("#search").keyup(function(e){
+			var data = $("#search").val();
+			var courseNo = ${courseNo};
+			$("#research").load("research.action",{"name":data,"courseNo":courseNo});
+			
+		})	
 		
 	});
 			
@@ -55,8 +61,18 @@
 	<jsp:include page="/WEB-INF/views/include/js.jsp" />
 	<div class="all-content-wrapper">
 		<br> <br> <br> <br> <br>
-		<h3>&nbsp;&nbsp;&nbsp;학생 목록</h3>
 		
+		<h3>&nbsp;&nbsp;&nbsp;학생 목록</h3>
+		<div class="product-status mg-b-15">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="product-status-wrap">
+                            
+                            <div class="asset-inner">
+		<input type="text" id="search" style="width:30%;float:right;margin-bottom: 5px" placeholder="검색어를 입력해주세요">
+		</div></div></div></div></div></div>
+		<div id="research">
 		<c:forEach var="studentList" varStatus="stat" items= "${studentList}">
 		<div class="product-status mg-b-15">
             <div class="container-fluid">
@@ -128,6 +144,8 @@
             </div>
         </div>
 		</c:forEach>
+		</div>
+		</div>
 		
 		<div class="custom-pagination">
 			<nav aria-label="Page navigation example">

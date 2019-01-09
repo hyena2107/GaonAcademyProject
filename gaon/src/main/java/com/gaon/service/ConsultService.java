@@ -18,4 +18,6 @@ public interface ConsultService {
 
 	ConsultVo viewStudentConsultDetail(int consultNo);
 
+	List<AccountVO> searchService(int courseNo, String name);
+
 }
