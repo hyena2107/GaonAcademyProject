@@ -32,12 +32,13 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value="coursesList.action",method = RequestMethod.GET)
-	public String consultList(int academyNo, Model model,HttpSession session) {
+	public String consultList(int academyNo, Model model,HttpSession session,String type) {
 		if(session.getAttribute("login")==null) {
 			return "redirect:/home.action";
 		}
 		List<CourseVO> courses = adminService.ConsultList(academyNo);
 		model.addAttribute("courses",courses);
+		model.addAttribute("type",type);
 		return "consult/consultList";
 	}
 	

@@ -34,7 +34,7 @@
 												<tr>
 													<td>${stat.count}</td>
 													<td>
-													<a href="/gaon/consult/studentList.action?courseNo=${CourseList.courseNo}">${CourseList.courseName}</a>
+													<a href="/gaon/consult/studentList.action?courseNo=${CourseList.courseNo}&type=${type}">${CourseList.courseName}</a>
 													</td>
 													<td>${CourseList.teacherName}</td>
 													<td>
@@ -56,7 +56,7 @@
 												items="${CourseList}">
 												<tr>
 													<td>${stat.count}</td>
-													<td><a href="/gaon/consult/studentList.action?courseNo=${CourseList.courseNo}">${CourseList.courseName}</a></td>
+													<td><a href="/gaon/consult/studentList.action?courseNo=${CourseList.courseNo }">${CourseList.courseName}</a></td>
 													<td>${CourseList.teacherName}</td>
 													<td>
 													<c:choose>

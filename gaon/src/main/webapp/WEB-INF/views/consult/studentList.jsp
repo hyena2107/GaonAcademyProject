@@ -14,12 +14,17 @@
 			var studentNo = $(this).attr("data-studentNo");
 			var studentName = $(this).attr("data-studentName");
 			var courseNo = ${courseNo}
+			var type = '${type}';
 			
 			if(${login.userType == "admin"}){
 
 				if($("#studentConsultList"+studentNo).css("display")=="none"){
 					$("#studentConsultList"+studentNo).css("display","block");
-					$("#studentConsultList"+studentNo).load("/gaon/admin/studentAttendList.action",{"studentNo":studentNo,"courseNo":courseNo})
+					if(type=="attend"){
+						$("#studentConsultList"+studentNo).load("/gaon/admin/studentAttendList.action",{"studentNo":studentNo,"courseNo":courseNo})
+					}else if(type=="consult"){
+						$("#studentConsultList"+studentNo).load("studentConsultList.action",{"studentNo":studentNo,"studentName":studentName})
+					}
 				}else{
 					$("#studentConsultList"+studentNo).css("display","none");
 				}

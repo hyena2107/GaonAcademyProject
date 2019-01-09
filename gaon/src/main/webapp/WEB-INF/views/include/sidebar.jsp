@@ -62,10 +62,10 @@
 													class="mini-sub-pro">성적</span></a></li>
 
 											<li><a title="Add Professor"
-												href="/gaon/admin/coursesList.action?academyNo=${login.academyNo}"><span
+												href="/gaon/admin/coursesList.action?academyNo=${login.academyNo}&type=consult"><span
 													class="mini-sub-pro">상담</span></a></li>
 											<li><a title="Edit Professor"
-												href="/gaon/admin/coursesList.action?academyNo=${login.academyNo}"><span
+												href="/gaon/admin/coursesList.action?academyNo=${login.academyNo}&type=attend"><span
 													class="mini-sub-pro">출결</span></a></li>
 										</c:when>
 										<c:when test='${login.userType=="teacher"}'> 

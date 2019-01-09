@@ -40,7 +40,7 @@ public class ConsultController {
 	}
 	
 	@RequestMapping(value="studentList.action",method=RequestMethod.GET)
-	public String studentList(int courseNo,Model model, HttpSession session) {
+	public String studentList(int courseNo,Model model, HttpSession session,String type) {
 		
 		if(session.getAttribute("login")==null) {
 			return "redirect:/home.action";
@@ -49,7 +49,7 @@ public class ConsultController {
 		List<AccountVO> studentList = consultService.studentList(courseNo);
 		model.addAttribute("studentList",studentList);
 		model.addAttribute("courseNo",courseNo);
-		
+		model.addAttribute("type",type);
 		return "consult/studentList";
 	}
 	
