@@ -16,5 +16,6 @@ public interface GradeMapper {
 	GradeVo selectGradeDetail(int gradeNo);
 	void addGrade(HashMap<String, Object> params);
 	void addScore(int enrollNo);
+	List<GradeVo> gradelist(HashMap<String,Object> params);
 	
 }

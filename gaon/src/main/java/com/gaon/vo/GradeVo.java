@@ -4,9 +4,8 @@ public class GradeVo {
 	
 	private int gradeNo;
 	private int enrollNo;
-	private int studentNo;
 	private String testName;
-	private String grade;
+	private int grade;
 	private String testDate;
 	
 	public int getGradeNo() {
@@ -21,22 +20,17 @@ public class GradeVo {
 	public void setEnrollNo(int enrollNo) {
 		this.enrollNo = enrollNo;
 	}
-	public int getStudentNo() {
-		return studentNo;
-	}
-	public void setStudentNo(int studentNo) {
-		this.studentNo = studentNo;
-	}
+	
 	public String getTestName() {
 		return testName;
 	}
 	public void setTestName(String testName) {
 		this.testName = testName;
 	}
-	public String getGrade() {
+	public int getGrade() {
 		return grade;
 	}
-	public void setGrade(String grade) {
+	public void setGrade(int grade) {
 		this.grade = grade;
 	}
 	public String getTestDate() {

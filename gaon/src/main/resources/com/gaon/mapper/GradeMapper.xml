@@ -6,4 +6,8 @@
 	<insert id="addGrade" parameterType="hashmap">
 		insert into grade(gradeNo,enrollno,testdate,grade,testname) values(gradeNo.nextval,(select enrollno from enroll where studentNo=#{studentNo} and courseNo=#{courseNo}),#{testDate},#{grade},#{testName})
 	</insert>
+	
+	<select id="gradelist" parameterType="hashmap" resultType="com.gaon.vo.GradeVo">
+		select * from grade where enrollno=(select enrollno from enroll where studentno=#{studentNo} and courseno = #{courseNo}) order by testDate desc
+	</select>
 </mapper>

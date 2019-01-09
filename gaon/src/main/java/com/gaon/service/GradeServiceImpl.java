@@ -71,5 +71,11 @@ public class GradeServiceImpl implements GradeService {
 		
 	}
 
+	@Override
+	public List<GradeVo> gradeListService(int studentNo, int courseNo) {
+		List<GradeVo> list = gradeDao.gradeListDao(studentNo, courseNo);
+		return list;
+	}
+
 	
 }

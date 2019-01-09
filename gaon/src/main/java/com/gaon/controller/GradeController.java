@@ -90,6 +90,20 @@ public class GradeController {
 	
 }
 	
+	@RequestMapping(value="studentgradelist.action")
+	public String GradeList(int studentNo,int courseNo,HttpSession session,Model model) {
+		
+		if(session.getAttribute("login")==null) {
+			return "redirect:/home.action";
+		}
+		
+	List<GradeVo> list=	gradeService.gradeListService(studentNo,courseNo);
+		model.addAttribute("gradelist",list);
+	return "grade/studentGradeList";
+	}
+	
+	
+	
 	
 
 

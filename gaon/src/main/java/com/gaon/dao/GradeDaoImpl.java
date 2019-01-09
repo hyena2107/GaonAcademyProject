@@ -84,4 +84,15 @@ public class GradeDaoImpl implements GradeDao {
 		
 	}
 
+	@Override
+	public List<GradeVo> gradeListDao(int studentNo, int courseNo) {
+		
+		HashMap<String,Object> params = new HashMap<>();
+		params.put("studentNo",studentNo);
+		params.put("courseNo",courseNo);
+		
+		List<GradeVo> list =gradeMapper.gradelist(params); 
+		return list;
+	}
+
 }

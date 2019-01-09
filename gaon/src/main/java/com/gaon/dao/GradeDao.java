@@ -25,4 +25,6 @@ public interface GradeDao {
 
 	void addGradeDao(int studentNo, int courseNo, String testDate, int grade, String testName);
 
+	List<GradeVo> gradeListDao(int studentNo, int courseNo);
+
 }

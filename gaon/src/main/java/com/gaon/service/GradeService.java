@@ -21,6 +21,8 @@ public interface GradeService {
 	GradeVo viewStudentGradeDetail(int gradeNo);
 
 	void addScoreService(int studentNo, int courseNo, String testDate, int grade, String testName);
+
+	List<GradeVo> gradeListService(int studentNo, int courseNo);
 	
 	
 
