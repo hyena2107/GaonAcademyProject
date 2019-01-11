@@ -1,5 +1,8 @@
 package com.gaon.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +10,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.gaon.service.AttendService;
@@ -25,11 +29,15 @@ public class AttendController {
 
 	
 	//출석 체크기능
-	@RequestMapping(value = {"/checkattend.action"}, method = RequestMethod.GET)
-	@ResponseBody
-	public String attendcheck(int studentNo, int courseNo, int attendType, String attendDate) {  //String 정의 == return의 형식임
+	@RequestMapping(value = {"/checkattend.action"}, method = RequestMethod.POST)
+	@ResponseBody	
+	public String attendcheck(int[] studentNoList, int courseNo, int attendType, String attendDate) {  //String 정의 == return의 형식임
 		
-		attendService.attendCheckService(studentNo, courseNo, attendType, attendDate);
+		for(int i=0;i<studentNoList.length;i++) {
+		attendService.attendCheckService(studentNoList[i], courseNo, attendType, attendDate);
+		System.out.println(studentNoList[i]);
+		}
+		
 		
 		return "성공!";
 	}

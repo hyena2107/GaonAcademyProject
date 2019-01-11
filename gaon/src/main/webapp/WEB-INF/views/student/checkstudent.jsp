@@ -6,7 +6,7 @@
 <head>
 <jsp:include page="/WEB-INF/views/include/css.jsp" />
 </head>
-<body>
+<body id="findcheckbox">
 	<jsp:include page="/WEB-INF/views/include/navbar.jsp" />
 	<jsp:include page="/WEB-INF/views/include/sidebar.jsp" />
 	<div class="all-content-wrapper">
@@ -18,6 +18,13 @@
 						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 							<div class="product-status-wrap drp-lst" id="attendlist">
 								<h4>강의 목록</h4>
+								
+								<a href="javascripts:" id="attend" >
+									<button type="button" class="btn btn-custon-rounded-two btn-danger">
+										출석체크
+											</button>																		
+								</a>
+								
 								<!-- 학생이없으면 추가  -->
 								<c:if test='${login.userType=="admin"}'>
 									<div class="add-product">
@@ -59,18 +66,19 @@
 															</td>
 															<td>	
 														
-																	<a href="javascripts:" id="attend" data-courseNo="${courseNo }" data-studentNo="${list.memberNo }" data-attend="1">
-																		<button type="button" class="btn btn-custon-rounded-two btn-success">
-																		출석
-																		</button>																		
-																	</a>
-																	<a href="javascripts:" id="absent" data-courseNo="${courseNo }" data-studentNo="${list.memberNo }"data-attend="0">
+														
+																	
+																		<input type="checkbox" class="checkbox"  data-studentNo="${list.memberNo }" >
+																		출석																		
+																	
+																	<%-- <a href="javascripts:" id="absent" data-courseNo="${courseNo }" data-studentNo="${list.memberNo }"data-attend="0">
 																		<button type="button" class="btn btn-custon-rounded-two btn-danger">
 																		결석
 																		</button>																		
-																	</a>
+																	</a> --%>
 															
-															
+															<input type="hidden" name="courseNo" value="${courseNo }">
+															<input type="hidden" name="memberNo" value="${list.memberNo}">
 															
 															</td>
 															
@@ -78,6 +86,7 @@
 													</c:if>
 												</div>
 											</c:forEach>
+											
 
 										</table>
 									</c:when>
@@ -96,16 +105,42 @@
 	<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 	<script type="text/javascript">
 	$(function(){
+		
+		
+		
+		$('#nopaymembers').find('.membercheck').each(
+				function() {
+					if ($(this).is(':checked')) {
+						memberArray.push($(this).attr(
+								'data-memberno'));
+					}
+				});
+		
+		
+		
+		
+		
+		
+		
 		$("#attendlist").on("click","#attend",function(e){
-			var courseNo= $(this).attr("data-courseNo");
-			var studentNo= $(this).attr("data-studentNo");
-			var attendType = $(this).attr("data-attend");
+			var memberArray = new Array();
+			var courseNo= ${courseNo}
 			var attendDate = $("#attendDate").val();
+			
+			$("#findcheckbox").find(".checkbox").each(
+					function(e){
+						if($(this).is(":checked")){
+							memberArray.push($(this).attr("data-studentNo"));
+						}
+					})
+			
+			
+			console.log(memberArray)
 			
 			$.ajax({
 				url:"/gaon/attend/checkattend.action",
-				data:{"courseNo":courseNo,"studentNo":studentNo,"attendType":attendType,"attendDate":attendDate},
-				method:"get",
+				data:{"courseNo":courseNo,"studentNoList":memberArray,"attendType":1,"attendDate":attendDate},
+				type:"post",
 				success:function(data,status,xhr){
 					alert("출석했습니다.");
 				}
@@ -113,21 +148,7 @@
 			
 		});
 	
-		$("#attendlist").on("click","#absent",function(e){
-			var courseNo= $(this).attr("data-courseNo");
-			var studentNo= $(this).attr("data-studentNo");
-			var attendType = $(this).attr("data-attend");
-			var attendDate = $("#attendDate").val();
-			
-			$.ajax({
-				url:"/gaon/attend/checkattend.action",
-				data:{"courseNo":courseNo,"studentNo":studentNo,"attendType":attendType,"attendDate":attendDate},
-				method:"get",
-				success:function(data,status,xhr){
-					alert("결석했습니다.");
-				}
-			})
-		});
+		
 		
 		
 	});
