@@ -116,12 +116,6 @@
 					}
 				});
 		
-		
-		
-		
-		
-		
-		
 		$("#attendlist").on("click","#attend",function(e){
 			var memberArray = new Array();
 			var courseNo= ${courseNo}
@@ -133,14 +127,16 @@
 							memberArray.push($(this).attr("data-studentNo"));
 						}
 					})
+					
 			
 			
 			console.log(memberArray)
 			
+			
 			$.ajax({
 				url:"/gaon/attend/checkattend.action",
+				type:"get",
 				data:{"courseNo":courseNo,"studentNoList":memberArray,"attendType":1,"attendDate":attendDate},
-				type:"post",
 				success:function(data,status,xhr){
 					alert("출석했습니다.");
 				}

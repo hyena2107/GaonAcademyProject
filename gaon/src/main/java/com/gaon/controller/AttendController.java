@@ -29,14 +29,16 @@ public class AttendController {
 
 	
 	//출석 체크기능
-	@RequestMapping(value = {"/checkattend.action"}, method = RequestMethod.POST)
+	@RequestMapping(value = "/checkattend.action")
 	@ResponseBody	
-	public String attendcheck(int[] studentNoList, int courseNo, int attendType, String attendDate) {  //String 정의 == return의 형식임
+	public String attendcheck(@RequestParam(value="studentNoList[]") List<Integer> studentNoList, int courseNo, int attendType, String attendDate) {  //String 정의 == return의 형식임
 		
-		for(int i=0;i<studentNoList.length;i++) {
-		attendService.attendCheckService(studentNoList[i], courseNo, attendType, attendDate);
-		System.out.println(studentNoList[i]);
-		}
+		System.out.println(studentNoList);
+		
+//		for(int i=0;i<studentNoList.size();i++) {
+//		attendService.attendCheckService(studentNoList.get(i), courseNo, attendType, attendDate);
+//		System.out.println(studentNoList.get(i));
+//		}
 		
 		
 		return "성공!";
