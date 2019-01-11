@@ -33,13 +33,9 @@ public class AttendController {
 	@ResponseBody	
 	public String attendcheck(@RequestParam(value="studentNoList[]") List<Integer> studentNoList, int courseNo, int attendType, String attendDate) {  //String 정의 == return의 형식임
 		
-		System.out.println(studentNoList);
-		
-//		for(int i=0;i<studentNoList.size();i++) {
-//		attendService.attendCheckService(studentNoList.get(i), courseNo, attendType, attendDate);
-//		System.out.println(studentNoList.get(i));
-//		}
-		
+		for(int i=0;i<studentNoList.size();i++) {
+		attendService.attendCheckService(studentNoList.get(i), courseNo, attendType, attendDate);
+		}
 		
 		return "성공!";
 	}
